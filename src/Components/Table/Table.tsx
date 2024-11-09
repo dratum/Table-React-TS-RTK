@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { companiesData } from "../../data-companies/data";
+import { companiesData } from "../../data/data";
 import {
   getCompanies,
   toggleAllChecked,
@@ -8,6 +8,7 @@ import {
   addCompany,
 } from "../../slices/companiesSlices";
 import { CompanyRow } from "../CompanyRow/CompanyRow";
+import './styles.module.css'
 
 export const Table = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ export const Table = () => {
   }>({ title: "", address: "" });
 
   const handleAllChecked = () => {
-    setAllChecked(!allChecked);
+    setAllChecked(prev => !prev);
     dispatch(toggleAllChecked(!allChecked));
   };
 
@@ -29,7 +30,7 @@ export const Table = () => {
   };
 
   const handleNewCompanyChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = event.target;
     setNewCompany({ ...newCompany, [name]: value });
@@ -58,21 +59,19 @@ export const Table = () => {
   return (
     <div>
       <button onClick={handleAllChecked}>
-        {allChecked ? "Снять выделение" : "Выделить все"}
+        {allChecked ? "Remove checked" : "Checked all"}
       </button>
-
-      <button onClick={handleDelete}>Удалить выбранное</button>
-
+      <button onClick={handleDelete}>Delete select</button>
       <button onClick={() => setAddClicked(!addClicked)}>
-        {addClicked ? "Закрыть" : "Добавить компанию"}
+        {addClicked ? "Close" : "Add company"}
       </button>
 
       <table>
         <thead>
           <tr>
-            <th scope='col'>Выбрать</th>
-            <th scope='col'>Название компании</th>
-            <th scope='col'>Адрес</th>
+            <th scope='col'>Select</th>
+            <th scope='col'>Label</th>
+            <th scope='col'>Address</th>
           </tr>
         </thead>
         <tbody>
@@ -100,11 +99,11 @@ export const Table = () => {
                 />
               </td>
             </tr>
-          ) : (
-            <></>
-          )}
+          ) :
+            null
+          }
           {companies.map((company) => {
-            return <CompanyRow company={company} />;
+            return <CompanyRow key={company.id} company={company} />;
           })}
         </tbody>
       </table>

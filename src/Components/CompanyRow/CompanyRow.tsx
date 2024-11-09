@@ -1,4 +1,4 @@
-import { CompanyType } from "../../data-companies/data";
+import { CompanyType } from "../../data/data";
 import styles from "./styles.module.css";
 import { useAppDispatch } from "../../store";
 import { setChecked, updateCompany } from "../../slices/companiesSlices";

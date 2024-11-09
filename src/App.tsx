@@ -3,8 +3,8 @@ import "./App.css";
 function App() {
   return (
     <>
-      <div className='App-header'>
-        <h1>Список компаний</h1>
+      <div className='App'>
+        <h2>List of company</h2>
         <Table />
       </div>
     </>
