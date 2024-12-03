@@ -1,4 +1,4 @@
-import { Table } from "./Components/Table/Table";
+import { Table } from "../сomponents/Table/Table";
 import "./App.css";
 function App() {
   return (
